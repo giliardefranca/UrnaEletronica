@@ -7,7 +7,7 @@
 - Pyodbc
 - Thread
 - Pillow
-- -Sql Server
+- Sql Server
 # TODO
 
 - CRIAR UMA TABELA NO SQL SERVER COM SEGUINTES COLUNAS:
