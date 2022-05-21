@@ -5,7 +5,7 @@ class BancoDeDados():
 
     def __init__(self):
         self.dados_conexao = ("Driver={SQL Server};"
-                         "Server=hotname;"
+                         "Server=hostname;"
                          "Database=ContagemDeVotos")
         conexao = pyodbc.connect(self.dados_conexao)
         self.cursor = conexao.cursor()
