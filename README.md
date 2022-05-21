@@ -11,11 +11,11 @@
 # TODO
 
 - CRIAR UMA TABELA NO SQL SERVER COM SEGUINTES COLUNAS:
-id_candidato
-numero candidato
-nome candidato
-partido
-vice
+id_candidato,
+numero candidato,
+nome candidato,
+partido,
+vice,
 qtde_votos
 
  
