@@ -28,30 +28,29 @@ class UrnaEletronica:
         self.NUMERO_PARTIDO_LULA = '13'
         self.NUMERO_PARTIDO_BOLSONARO = '22'
 
+        self.font_size_letra = 14
+        self.font_size_numero = 30
+        self.color_font = 'black'
+        self.color_font_placar = 'white'
+        self.font_size_placar= 20
 
-    def FonteFormatadaContagemVotos(self, entry):
-        self.font = tkFont.Font(family="Arial", size=20)
-        entry.configure(font=self.font, foreground="white")
+
+    def FonteFormatada(self, entry, cor, size):
+        self.font = tkFont.Font(family="Arial", size=size)
+        entry.configure(font=self.font, foreground=cor)
 
     def ContagemVotosLula(self):
         self.lula, self.bolsonaro = self.banco_dados.InformacoesBancoDeDados()
         self.entry4.delete(0, END)
         self.entry4.insert(END, self.lula[5])
-        self.FonteFormatadaContagemVotos(self.entry4)
+        self.FonteFormatada(self.entry4,self.color_font_placar, self.font_size_placar)
 
     def ContagemVotosBolsonaro(self):
         lula, bolsonaro = self.banco_dados.InformacoesBancoDeDados()
         self.entry5.delete(0, END)
         self.entry5.insert(END, bolsonaro[5])
-        self.FonteFormatadaContagemVotos(self.entry5)
+        self.FonteFormatada(self.entry5, self.color_font_placar, self.font_size_placar)
 
-    def FonteFormatadaNumero(self, entry):
-        self.font = tkFont.Font(family="Arial", size=30)
-        entry.configure(font=self.font)
-
-    def FonteFormatadaLetras(self, entry):
-        self.font = tkFont.Font(family="Arial", size=14)
-        entry.configure(font=self.font)
 
     def Som(self):
         playsound('Urna Eletrônica.mp3')
@@ -61,11 +60,8 @@ class UrnaEletronica:
         self.msg = tkinter.messagebox.askquestion(title='JUSTIÇA ELEITORAL', message="É o seu Candidato?")
         return self.msg
 
-    def MensagemError(self):
-        tkinter.messagebox.showerror(title='JUSTIÇA ELEITORAL', message=f'Número Inválido.')
-
-    def SomMensagemError(self):
-        playsound('Alerta - Emergência.mp3')
+    def MensagemVotoNulo(self):
+        tkinter.messagebox.showerror(title='JUSTIÇA ELEITORAL', message=f'NÚMERO ERRADO. VOTO NULO!')
 
     def CarregandoImagemDosCandidato(self,presidente, vice):
         self.entry6_img = ImageTk.PhotoImage(Image.open(presidente))
@@ -80,10 +76,10 @@ class UrnaEletronica:
         self.braganeto = 'braganeto.png'
         return self.lula, self.alckim, self.bolsonaro, self.braganeto
 
-    def FonteFormatada(self):
-        self.FonteFormatadaLetras(self.entry1)
-        self.FonteFormatadaLetras(self.entry2)
-        self.FonteFormatadaLetras(self.entry3)
+    def FonteFormatadaEntrys(self):
+        self.FonteFormatada(self.entry1, self.color_font, self.font_size_letra)
+        self.FonteFormatada(self.entry2, self.color_font, self.font_size_letra)
+        self.FonteFormatada(self.entry3, self.color_font, self.font_size_letra)
 
     def Entrys(self, candidato):
         self.entry1.insert(END, candidato[2])
@@ -93,12 +89,12 @@ class UrnaEletronica:
     def CanditatoLula(self):
         self.lula, self.bolsonaro = self.banco_dados.InformacoesBancoDeDados()
         self.Entrys(self.lula)
-        self.FonteFormatada()
+        self.FonteFormatadaEntrys()
 
     def CanditatoBosonaro(self):
         self.lula, self.bolsonaro = self.banco_dados.InformacoesBancoDeDados()
         self.Entrys(self.bolsonaro)
-        self.FonteFormatada()
+        self.FonteFormatadaEntrys()
 
     def VotoBranco(self):
         self.entry0.insert(END, ' ')
@@ -109,7 +105,9 @@ class UrnaEletronica:
     def NumeroDoPartido(self):
         return self.entry0.get()
 
+
     def Votacao(self):
+
         lula, alckim, bolsonaro, braganeto = self.ImagemPresidenteEVice()
         if self.NumeroDoPartido() == self.NUMERO_PARTIDO_LULA:
             self.CanditatoLula()
@@ -126,7 +124,7 @@ class UrnaEletronica:
     def btn_clicked1(self):
         self.entry0.insert(END, '1')
         self.Votacao()
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def default(self):
         if self.entry0.get():
@@ -145,40 +143,40 @@ class UrnaEletronica:
     def btn_clicked2(self):
         self.entry0.insert(END, '2')
         self.Votacao()
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked3(self):
         self.entry0.insert(END, '3')
         self.Votacao()
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked4(self):
         self.entry0.insert(END, '4')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked5(self):
         self.entry0.insert(END, '5')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked6(self):
         self.entry0.insert(END, '6')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked7(self):
         self.entry0.insert(END, '7')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked8(self):
         self.entry0.insert(END, '8')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked9(self):
         self.entry0.insert(END, '9')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
     def btn_clicked0(self):
         self.entry0.insert(END, '0')
-        self.FonteFormatadaNumero(self.entry0)
+        self.FonteFormatada(self.entry0, self.color_font, self.font_size_numero)
 
 
     def btn_clickedVerde(self):
@@ -202,8 +200,8 @@ class UrnaEletronica:
             tkinter.messagebox.showinfo(title='JUSTIÇA ELEITORAL', message='VOTO EM BRANCO')
             self.default()
         else:
-            som = threading.Thread(target=self.MensagemError)
-            msg = threading.Thread(target=self.SomMensagemError)
+            som = threading.Thread(target=self.MensagemVotoNulo)
+            msg = threading.Thread(target=self.Som)
             som.start()
             msg.start()
             self.entry0.delete(0, END)
